@@ -1,0 +1,14 @@
+<manifest projecttype="ACCOUNTCUSTOMIZATION">
+  <projectname>SUBSIDIARY_IMPORT_ASSISTANCE</projectname>
+  <frameworkversion>1.0</frameworkversion>
+  <dependencies>
+    <features>
+      <feature required="true">SERVERSIDESCRIPTING</feature>
+      <feature required="false">CRM</feature>
+    </features>
+    <files>
+      <file>/SuiteScripts/Subsidiary Import Assistance.js</file>
+      <file>/SuiteScripts/NS_MR_SubsidiaryImport.js</file>
+    </files>
+  </dependencies>
+</manifest>
