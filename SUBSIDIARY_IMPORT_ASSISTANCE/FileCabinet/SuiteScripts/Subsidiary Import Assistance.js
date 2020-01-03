@@ -6,11 +6,30 @@ define(['N/ui/serverWidget', 'N/email', 'N/runtime', 'N/record', 'N/file','N/red
     function(serverWidget,email, runtime,record,file,redirect,task,url) {
         function onRequest(context) {
 			try{
+			
+			 
             if (context.request.method === 'GET') {
                 var form = serverWidget.createForm({
                     title: 'Subsidiary Import Assistance'
                 });
-				var scriptparamId = runtime.getCurrentScript().getParameter("custscript_upload_document_folder");
+                //Read from the global variable
+				var scriptparamId = runtime.getCurrentScript().getParameter("custscript_subimporttool_folder");
+				if(!scriptparamId){
+					//Create a new Folder
+					 var objRecord = record.create({
+				            type: record.Type.FOLDER,
+				            isDynamic: true
+				        });
+				        objRecord.setValue({
+				            fieldId: 'name',
+				            value: 'SubsidiaryImport'
+				        });
+				        scriptparamId = objRecord.save({
+				            enableSourcing: true,
+				            ignoreMandatoryFields: true
+				        });
+				        runtime.getCurrentScript().setParameter("custscript_subimporttool_folder",scriptparamId);
+				}
 				log.debug('scriptparamId',scriptparamId);
 				var downloadTemp = context.request.parameters.isTemplateDownload;
 				
